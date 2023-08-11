@@ -151,7 +151,7 @@ This callback function return transaction status.
 
 Make sure to turn on Server mode in Gkash Business settings before initializing the SDK.
 
-![ss](https://github.com/gkashmy/gkash-client-tcp-softpos-windows/assets/72077476/039f3517-12db-468d-b800-aee0293a1361)
+![ss1](https://github.com/gkashmy/gkash-client-tcp-softpos-windows/assets/72077476/daa2076d-3d55-452f-b483-fe4b7ce19533)
 
 ## License
 [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/)
