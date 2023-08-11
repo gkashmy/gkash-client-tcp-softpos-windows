@@ -1,4 +1,4 @@
-# gkash-client-tcp-softpos-windows
+# gkash-client-tcp-softpos-windows (Offline payment)
 This project serves as a sample that demonstrates how to communicate with the Gkash SoftPOS APP and perform offline payments.
 
 ## Installation
