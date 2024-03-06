@@ -20,10 +20,6 @@ SDK Initialization
 | environment | Pass true to enable production environment, default is false | bool |
 | logger | To enable logging for investigate SDK error (Optional) | ILogger |
 
-Initialize without logging
-```csharp
-//Implement IDataCallback to your class and pass into ClientSocket
-```
 Initialize with logging
 ```csharp
 var serilogLogger = new LoggerConfiguration()
