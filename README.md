@@ -23,7 +23,6 @@ SDK Initialization
 Initialize without logging
 ```csharp
 //Implement IDataCallback to your class and pass into ClientSocket
-ClientSocket client = new ClientSocket(loginUsername, password, dataCallback, certPath, environment);
 ```
 Initialize with logging
 ```csharp
@@ -34,7 +33,10 @@ var serilogLogger = new LoggerConfiguration()
                     
 var logger = new  SerilogLoggerFactory(serilogLogger).CreateLogger<Form1>();
 
-ClientSocket client = new ClientSocket(Username, Password, dataCallback, certPath, Environment, logger);
+ClientSocket client = new ClientSocket(this, certPath, isProduction, logger);
+// Username is your Terminal Id
+string loginStatus = client.LoginAsync(username, password).Result;
+
 ```
 
 ## Request Payment
@@ -45,6 +47,8 @@ When calling this function, SDK will send a request to SoftPOS to perform transa
 public class PaymentRequestDto
 {
     public decimal Amount { get; set; }
+    public string Currency { get; set; }
+    public string TerminalId { get; set; }
     public string Email { get; set; }
     public string MobileNo { get; set; }
     public string ReferenceNo { get; set; }
@@ -69,6 +73,8 @@ public class PaymentRequestDto
 | ATOME_QR |
 | MCASH_QR |
 | DUITNOW_QR |
+| FINEXUS_DUITNOW_QR |
+| SARAWAK_PAY_QR |
 
 - `Amount`: the amount to be paid.
 - `Email`: the email of the customer making the payment. (Optional)

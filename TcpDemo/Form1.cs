@@ -14,6 +14,8 @@ namespace TcpSDKDemo
     {
         private ClientSocket client;
         private PaymentType paymentType = PaymentType.CARD_PAYMENT;
+        // Username is your Terminal Id
+        private string username;
         public Form1()
         {
             InitializeComponent();
@@ -116,7 +118,7 @@ namespace TcpSDKDemo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string username = textBox1.Text;
+             username = textBox1.Text;
             string password = textBox2.Text;
 
             var serilogLogger = new LoggerConfiguration()
@@ -136,7 +138,12 @@ namespace TcpSDKDemo
 
             bool isProduction = checkBox2.Checked;
 
-            client = new ClientSocket(username, password, this, certPath, isProduction, logger);
+ 
+            client = new ClientSocket(this, certPath, isProduction, logger);
+
+            // Username is your Terminal Id
+            string loginStatus = client.LoginAsync(username, password).Result;
+            Console.WriteLine(loginStatus);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -151,6 +158,7 @@ namespace TcpSDKDemo
             {
                 Amount = amount,
                 Email = email,
+                TerminalId = username,
                 MobileNo = mobileNo,
                 ReferenceNo = referenceNo,
                 PaymentType = paymentType,
@@ -282,13 +290,19 @@ namespace TcpSDKDemo
             if (client != null)
             {
                 //your query result
-                TransactionStatus status = client.QueryStatus(textBox8.Text);
+                TransactionStatus status = client.QueryStatusAsync(textBox8.Text).Result;
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             client.CancelPayment();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            textBox7.Text = "SarawakPay QR";
+            paymentType = PaymentType.SARAWAK_PAY_QR;
         }
     }
 }
